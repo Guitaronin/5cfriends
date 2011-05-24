@@ -1,0 +1,70 @@
+/* @override http://www.numberguru.com/stylesheets/styles.css */
+
+html {
+	background: #d6d6d6 url(/images/bkg_layer_bot.png) repeat-x;
+	height: 900px;
+}
+
+
+body {
+	font: 12px Arial, sans-serif;
+	color: #444;
+}
+
+p {
+	margin-bottom: 10px;
+}
+
+h1 {
+	font-size: 30px;
+	color: #333;
+	font-weight: bold;
+}
+
+h3 {
+	font-size: 16px;
+	color: #333;
+	font-weight: bold;
+}
+
+a.logo {
+	width: 301px;
+	height: 115px;
+	background: url(/images/logo.png) no-repeat;
+	display: block;
+	margin-top: 15px;
+	float: left;
+	font-size: 12px;
+	color: #444;
+}
+
+/* @group top */
+
+
+/* @static */
+
+div#article {
+	padding: 20px;
+}
+
+div#article h1 {
+	width: 100%;
+	text-align: center;
+}
+
+div#article p {
+	text-align: justify;
+}
+
+/* @end */
+
+/* @flash notices */
+
+div#flash-notice {	
+	padding: 10px 0 10px 0;
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: bold;
+	background-color: #00ff00;
+	border: 2px solid #66aa00;
+}
