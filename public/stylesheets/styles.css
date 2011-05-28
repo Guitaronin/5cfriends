@@ -1,14 +1,12 @@
 /* @override http://www.numberguru.com/stylesheets/styles.css */
 
 html {
-	background: #d6d6d6 url(/images/bkg_layer_bot.png) repeat-x;
-	height: 900px;
 }
 
 
 body {
 	font: 12px Arial, sans-serif;
-	color: #444;
+/*	color: #444;*/
 }
 
 p {
@@ -34,14 +32,29 @@ a.logo {
 	display: block;
 	margin-top: 15px;
 	float: left;
-	font-size: 12px;
+	font-size: 20px;
 	color: #444;
+	text-decoration: none;
 }
 
 /* @group top */
 
 
 /* @static */
+
+div#login {
+	position: absolute;
+	right: 0;
+	top: 20px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+div#login a {
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: none;
+}
 
 div#article {
 	padding: 20px;

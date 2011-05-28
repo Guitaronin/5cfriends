@@ -35,12 +35,21 @@ class App < Sinatra::Application
     protected!
   end
   
+  get '/logout' do
+    unset_user!
+    redirect '/'
+  end
+  
+  get '/login' do
+    redirect '/home'
+  end
+  
   get '/' do
     erb :index
   end
   
   get '/home' do
-    "Welcome, #{user}"
+    erb :home
   end
   
   

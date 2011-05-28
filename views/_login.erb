@@ -1,0 +1,7 @@
+<div id="login">
+	<% if logged_in? %>
+		Logged in as: <%= user %>
+	<% else %>
+		<a href="/login">Login</a>
+	<% end %>
+</div>
