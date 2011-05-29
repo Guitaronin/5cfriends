@@ -6,7 +6,7 @@ html {
 
 body {
 	font: 12px Arial, sans-serif;
-/*	color: #444;*/
+	color: #444;
 }
 
 p {
@@ -25,6 +25,21 @@ h3 {
 	font-weight: bold;
 }
 
+label {
+	display: block;
+	font-size: 16px;
+	font-weight: bold;
+	color: #333;
+}
+
+textarea {
+	display: block;
+	height: 100px;
+	width: 300px;
+	margin: 20px 0 20px 0;
+	color: #333;
+	font-size: 12px;
+}
 a.logo {
 	width: 301px;
 	height: 115px;
@@ -69,6 +84,29 @@ div#article p {
 	text-align: justify;
 }
 
+div#message_board {
+	width: 800px;
+	margin: 0 auto 0 auto;
+	padding: 20px;
+/*	border: 1px solid #bbb;*/
+	background-color: #FFFFEE;
+}
+
+div.message {
+	border-bottom: 1px solid #ccc;
+	width: 100%;
+}
+
+p.message {
+	font-size: 16px;
+}
+
+span.author {
+	font-weight: bold;
+}
+p.message-info {
+	text-align: right;
+}
 /* @end */
 
 /* @flash notices */

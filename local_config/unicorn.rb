@@ -1,4 +1,4 @@
-# unicorn -c /www/number_guru/local_config/unicorn.rb -d -w
+# unicorn -c /www/5cfriends/local_config/unicorn.rb -d -w
 
 @application_root = File.expand_path(__FILE__ + '/../../')
 

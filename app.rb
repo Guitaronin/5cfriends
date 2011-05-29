@@ -3,6 +3,7 @@ require 'sinatra'
 require 'erb'
 require 'logger'
 require 'rack-flash'
+require 'mongomatic'
 
 class App < Sinatra::Application
   enable :sessions
@@ -45,11 +46,22 @@ class App < Sinatra::Application
   end
   
   get '/' do
-    erb :index
+    erb :index, :layout => false
   end
   
   get '/home' do
+    @messages = Message.find.sort(:timestamp, :desc).to_a
     erb :home
+  end
+  
+  post '/message' do
+    message_doc = {
+      :user    => user,
+      :message => params[:message]
+    }
+    
+    Message.insert(message_doc)
+    redirect '/home'
   end
   
   
@@ -84,5 +96,43 @@ class App < Sinatra::Application
       erb(template, :layout => false, :locals => locals, :cache => false)
     end
   end
+
+end
+
+
+
+class Model < Mongomatic::Base
+  Mongomatic.db = Mongo::Connection.new.db('5cfriends')
   
+  class << self
+    @@opts = {}
+
+    def insert(doc_hash, opts={})
+      if @@opts[:created_stamp] == true
+        doc_hash.merge!(:created_at => Time.now)
+      end
+      super(doc_hash, opts)
+    end
+
+    def update(opts={},update_doc=@doc)
+      if @@opts[:updated_stamp] == true
+        update_doc.merge!(:updated_at => Time.now)
+      end
+      super(opts, update_doc)
+    end
+
+    def created_stamp(bool)
+      @@opts[:created_stamp] = bool
+    end
+
+    def updated_stamp(bool)
+      @@opts[:created_stamp] = bool
+    end
+
+  end
+end
+
+class Message < Model
+  created_stamp true
+  updated_stamp true
 end

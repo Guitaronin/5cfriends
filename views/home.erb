@@ -1,2 +1,20 @@
 <h1><%= user %>'s 5cfriends homepage</h1>
-<h2>I wish there was something for you to do :(</h2>
+
+<div id="message_board">
+	<h2>Message Board</h2>
+	
+	<form action="/message" method="post">
+		<label for="message">Message:</label>
+		<textarea name="message" value=""></textarea>
+		<input type="submit" value="leave message"/>
+	</form>
+	
+	<div id="messages">
+		<% @messages.each do |message| %>
+			<div class="message">
+					<p class="message"><span class="author"><%= message['user'] %></span>: <%= message['message'] %></p>
+					<p class="message-info">--  at <%= message['created_at'].strftime("%a %b %d, at %I:%M%p")%></p>
+			</div>
+		<% end %>
+	</div>
+</div>
