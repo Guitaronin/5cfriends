@@ -2,7 +2,7 @@
 
 echo getting unicorn pid
 # pid=$(ps aux | grep 'unicorn master' | grep -v '(old)' | grep -v grep | awk '{print $2}')
-pid=$(cat /www/number_guru/tmp/unicorn.pid)
+pid=$(cat /www/5cfriends/tmp/unicorn.pid)
 
 echo hupping unicorn process $pid
 kill -HUP $pid
