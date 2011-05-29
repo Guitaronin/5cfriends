@@ -50,7 +50,7 @@ class App < Sinatra::Application
   end
   
   get '/home' do
-    @messages = Message.find.sort(:timestamp, :desc).to_a
+    @messages = Message.find.sort(:created_at, :desc).to_a
     erb :home
   end
   
