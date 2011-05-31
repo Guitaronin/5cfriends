@@ -6,7 +6,7 @@
 	<input name="name" type="text" value="<%= @chore['name'] %>"/>
 	
 	<label for="description">Description</label>
-	<textarea name="description" value="<%= @chore['description'] %>"></textarea>
+	<textarea name="description"><%= @chore['description'] %></textarea>
 	
 	<input type="submit" value="update chore"/>
 </form>
