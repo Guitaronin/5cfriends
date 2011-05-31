@@ -1,0 +1,12 @@
+<%= partial :_sub_nav_chores %>
+<div class="chore">
+	<h1><%= @chore['name'] %></h1>
+	<p><%= @chore['description'] %></p>
+	<form action="/chore/delete" method="post">
+		<ul class="nav-crud">
+			<li><a href="/chore/edit/<%= @chore['_id'] %>">edit</a></li>
+			<li><input type="hidden" name="id" value="<%= @chore['_id'] %>"/></li>
+			<li><input type="submit" value="delete"/></li>
+		</ul>
+	</form>
+</div>

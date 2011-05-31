@@ -40,21 +40,163 @@ textarea {
 	color: #333;
 	font-size: 12px;
 }
+
+
+div#wrapper {
+	position: relative;
+	width: 100%;
+}
+
+div#header {
+	position: relative;
+	width: 1000px;
+	height: 100px;
+	margin: 0 auto 0 auto;
+}
+
+div#logo {
+	position: absolute;
+}
+
 a.logo {
 	width: 301px;
 	height: 115px;
-	background: url(/images/logo.png) no-repeat;
-	display: block;
-	margin-top: 15px;
-	float: left;
 	font-size: 20px;
 	color: #444;
 	text-decoration: none;
 }
 
+div#content {
+	position: relative;
+	width: 1000px;
+	height: 200px;
+	margin: 0 auto 0 auto;
+}
+
+div#content h1 {
+	background-color: #ddf;
+	border-top: 1px solid #444;
+	border-bottom: 1px solid #444;
+	padding: 5px;
+}
+
+div.chore {
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+}
+
+div.chore p {
+	font-size: 16px;
+}
+
+div#footer {
+	position: relative;
+	bottom: 0;
+	width: 1000px;
+	height: 288px;
+	background: none;
+}
+
 /* @group top */
 
+div#nav {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
 
+div#nav ul {
+	list-style-type: none;
+}
+
+div#nav ul li {
+	float: left;
+}
+
+div#nav ul li a {
+	font-size: 20px;
+	color: #444;
+	text-decoration: none;
+	display: block;
+	width: 100px;
+	border: 1px solid #444;
+	text-align: center;
+}
+
+div#nav ul li a:hover {
+	color: #000;
+	text-decoration: none;
+}
+
+div#nav-sub {
+	position: relative;
+	height: 40px;
+}
+
+div#nav-sub ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+div#nav-sub ul li {
+	float: left;
+}
+
+div#nav-sub ul li a {
+	font-size: 16px;
+	color: #444;
+	text-decoration: none;
+	display: block;
+	width: 100px;
+	border: 1px solid #444;
+	text-align: center;
+}
+
+div#nav-sub ul li a:hover {
+	color: #000;
+	text-decoration: none;
+}
+
+
+ul.nav-crud {
+	list-style-type: none;
+	height: 25px;
+	margin: 0;
+	padding: 0;
+}
+
+ul.nav-crud li {
+	float: left;
+}
+
+ul.nav-crud li a {
+	display: block;
+	margin: 0 5px 0 5px;
+	font-size: 14px;
+	color: #0000ff;
+	text-decoration: none;
+}
+
+ul.nav-crud li a:hover {
+	color: #000;
+	text-decoration: underline;
+}
+
+ul.nav-crud li input {
+	display: block;
+	margin: 0 5px 0 5px;
+	font-size: 14px;
+	color: #0000ff;
+	border: none;
+	background: none;
+	padding: 0;
+}
+
+ul.nav-crud li input:hover {
+	color: #000;
+	text-decoration: underline;
+}
 /* @static */
 
 div#login {

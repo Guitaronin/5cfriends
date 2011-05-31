@@ -1,0 +1,12 @@
+<h1>Edit Chore</h1>
+<%= partial :_sub_nav_chores %>
+<form action="/chore/create" method="post">
+	<input name="id" type="hidden" value="<%= @chore['_id'] %>">
+	<label for="name">Name:</label>
+	<input name="name" type="text" value="<%= @chore['name'] %>"/>
+	
+	<label for="description">Description</label>
+	<textarea name="description" value="<%= @chore['description'] %>"></textarea>
+	
+	<input type="submit" value="update chore"/>
+</form>

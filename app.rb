@@ -65,6 +65,42 @@ class App < Sinatra::Application
   end
   
   
+  get '/chores' do
+    @chores = Chore.find.to_a
+    erb :chores
+  end
+  
+  get '/chore/new' do
+    erb :chore_new
+  end
+  
+  get '/chore/:id' do
+    @chore = Chore.find_one( :_id => BSON::ObjectId(params[:id]) )
+    erb :chore
+  end
+  
+  get '/chore/edit/:id' do
+    @chore = Chore.find_one( :_id => BSON::ObjectId(params[:id]) )
+    erb :chore_edit
+  end
+  
+  post '/chore/create' do
+    chore_doc = {
+      :name        => params[:name],
+      :description => params[:description]
+    }
+    
+    chore_id = Chore.insert(chore_doc)
+    redirect "/chore/#{chore_id}"
+  end
+  
+  post '/chore/delete' do
+    chore = Chore.find_one( :_id => BSON::ObjectId(params[:id]) )
+    chore.remove
+    redirect '/chores'
+  end
+  
+  
   helpers do
     def protected!
       unless logged_in?
@@ -106,6 +142,11 @@ class Model < Mongomatic::Base
   
   class << self
     @@opts = {}
+    
+    def find(query={}, opts={})
+      results = super(query, opts)
+      results ? results : {}
+    end
 
     def insert(doc_hash, opts={})
       if @@opts[:created_stamp] == true
@@ -133,6 +174,11 @@ class Model < Mongomatic::Base
 end
 
 class Message < Model
+  created_stamp true
+  updated_stamp true
+end
+
+class Chore < Model
   created_stamp true
   updated_stamp true
 end

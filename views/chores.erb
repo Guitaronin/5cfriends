@@ -1,0 +1,16 @@
+<h1>Chores</h1>
+<%= partial :_sub_nav_chores %>
+<% @chores.each do |chore| %>
+	<div class="chore">
+		<h3><%= chore['name'] %></h3>
+		<p><%= chore['description'] %></p>
+		<ul class="nav-crud">
+			<li><a href="/chore/<%= chore['_id'] %>">show</a></li>
+			<li><a href="/chore/edit/<%= chore['_id'] %>">edit</a></li>
+			<li><form action="/chore/delete" method="post">
+				<input type="hidden" name="id" value="<%= chore['_id'] %>"/>
+				<input type="submit" value="delete"/>
+			</form></li>
+		</ul>
+	</div>
+<% end %>
