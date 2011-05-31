@@ -94,6 +94,16 @@ class App < Sinatra::Application
     redirect "/chore/#{chore_id}"
   end
   
+  post '/chore/update' do
+    chore = Chore.find_one( :_id => BSON::ObjectId(params[:id]) )
+
+    chore['name']        = params[:name]
+    chore['description'] = params[:description]
+    
+    chore.update
+    redirect '/chores'
+  end
+  
   post '/chore/delete' do
     chore = Chore.find_one( :_id => BSON::ObjectId(params[:id]) )
     chore.remove
