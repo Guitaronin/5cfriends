@@ -1,6 +1,6 @@
 <div id="login">
 	<% if logged_in? %>
-		Logged in as: <%= user %>
+		<a href="/home">Logged in as: <%= user %></a>
 	<% else %>
 		<a href="/login">Login</a>
 	<% end %>
