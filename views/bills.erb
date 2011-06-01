@@ -1,0 +1,16 @@
+<h1>Bills</h1>
+<%= partial :_sub_nav_bills %>
+<% @bills.each do |bill| %>
+	<div class="bill">
+		<h3><%= bill['name'] %></h3>
+		<p>$<%= bill['amount'] %></p>
+		<ul class="nav-crud">
+			<li><a href="/bill/<%= bill['_id'] %>">show</a></li>
+			<li><a href="/bill/edit/<%= bill['_id'] %>">edit</a></li>
+			<li><form action="/bill/delete" method="post">
+				<input type="hidden" name="id" value="<%= bill['_id'] %>"/>
+				<input type="submit" value="delete"/>
+			</form></li>
+		</ul>
+	</div>
+<% end %>

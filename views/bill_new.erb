@@ -1,0 +1,25 @@
+<h1>Add Bill</h1>
+<%= partial :_sub_nav_bills %>
+<form action="/bill/create" method="post">
+	<input name="id" type="hidden" value="">
+	<label for="name">Name:</label>
+	<input name="name" type="text" value=""/>
+	
+	<label for="amount">Amount:</label>
+	<input name="amount" type="text" value=""/>
+	
+	<label for="due_date">Due Date:</label>
+	<select name="due_date">
+		<% for d in 1..31 %>
+			<option value="<%= d %>"><%= d %></option>
+		<% end %>
+	</select>
+	<span class="tip">enter day of the month (i.e. "1" for 1st of every month)</span>
+	
+	<label for="description">Description:</label>
+	<textarea name="description" value=""></textarea>
+	
+	
+	
+	<input type="submit" value="create bill"/>
+</form>

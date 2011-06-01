@@ -64,6 +64,9 @@ class App < Sinatra::Application
     redirect '/home'
   end
   
+##################################
+# CHORES                         #
+##################################
   
   get '/chores' do
     @chores = Chore.find.to_a
@@ -110,7 +113,66 @@ class App < Sinatra::Application
     redirect '/chores'
   end
   
-  
+  ##################################
+  # BILLS                          #
+  ##################################
+
+    get '/bills' do
+      @bills = Bill.find.to_a
+      erb :bills
+    end
+
+    get '/bill/new' do
+      erb :bill_new
+    end
+
+    get '/bill/:id' do
+      @bill = Bill.find_one( :_id => BSON::ObjectId(params[:id]) )
+      erb :bill
+    end
+
+    get '/bill/edit/:id' do
+      @bill = Bill.find_one( :_id => BSON::ObjectId(params[:id]) )
+      erb :bill_edit
+    end
+
+    post '/bill/create' do
+      bill_doc = {
+        :name        => params[:name],
+        :amount      => params[:amount],
+        :due_date    => params[:due_date],
+        :description => params[:description]
+      }
+
+      bill_id = Bill.insert(bill_doc)
+      redirect "/bill/#{bill_id}"
+    end
+
+    post '/bill/update' do
+      bill = Bill.find_one( :_id => BSON::ObjectId(params[:id]) )
+
+      bill['name']        = params[:name]
+      bill['amount']      = params[:amount]
+      bill['due_date']    = params[:due_date]
+      bill['description'] = params[:description]
+
+      bill.update
+      redirect '/bills'
+    end
+
+    post '/bill/delete' do
+      bill = Bill.find_one( :_id => BSON::ObjectId(params[:id]) )
+      bill.remove
+      redirect '/bills'
+    end
+    
+    
+    
+    
+    
+    
+    
+    
   helpers do
     def protected!
       unless logged_in?
@@ -189,6 +251,11 @@ class Message < Model
 end
 
 class Chore < Model
+  created_stamp true
+  updated_stamp true
+end
+
+class Bill < Model
   created_stamp true
   updated_stamp true
 end
