@@ -226,20 +226,22 @@ div#article p {
 	text-align: justify;
 }
 
-div#message_board {
-	width: 800px;
-	margin: 0 auto 0 auto;
+div#postit_board {
+	position: absolute;
+	right: 0;
+	width: 350px;
+/*	margin: 0 auto 0 auto;*/
 	padding: 20px;
 /*	border: 1px solid #bbb;*/
 	background-color: #FFFFEE;
 }
 
-div.message {
+div.postit {
 	border-bottom: 1px solid #ccc;
 	width: 100%;
 }
 
-p.message {
+p.postit {
 	font-size: 16px;
 }
 

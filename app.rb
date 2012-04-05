@@ -4,6 +4,8 @@ require 'erb'
 require 'logger'
 require 'rack-flash'
 require 'mongomatic'
+require 'cgi'
+require 'mechanize'
 
 class App < Sinatra::Application
   enable :sessions
@@ -36,6 +38,15 @@ class App < Sinatra::Application
     protected!
   end
   
+  get '/smartypants' do
+    if params[:url]
+      # url = 'http://' + CGI.unescape(params[:url])
+      return Mechanize.new.get(params[:url]).body
+    else
+      erb :smartypants, :layout => false
+    end
+  end
+  
   get '/logout' do
     unset_user!
     redirect '/'
@@ -50,17 +61,19 @@ class App < Sinatra::Application
   end
   
   get '/home' do
-    @messages = Message.find.sort(:created_at, :desc).to_a
+    @postits = Postit.find.sort(:created_at, :desc).to_a
     erb :home
   end
   
-  post '/message' do
-    message_doc = {
+  
+  
+  post '/postit' do
+    postit_doc = {
       :user    => user,
       :message => params[:message]
     }
     
-    Message.insert(message_doc)
+    Postit.insert(postit_doc)
     redirect '/home'
   end
   
@@ -167,7 +180,70 @@ class App < Sinatra::Application
     end
     
     
-    
+    ##################################
+    # MESSAGES                          #
+    ##################################
+
+      get '/messages' do
+        @messages = Message.find.to_a
+        erb :messages
+      end
+
+      get '/message/new' do
+        erb :message_new
+      end
+
+      get '/message/:id' do
+        @message = Message.find_one( :_id => BSON::ObjectId(params[:id]) )
+        erb :message
+      end
+
+      # get '/message/edit/:id' do
+      #   @message = Message.find_one( :_id => BSON::ObjectId(params[:id]) )
+      #   erb :message_edit
+      # end
+
+      post '/message/create' do
+        message_doc = {
+          :author        => user,
+          :message       => params[:message],
+          :created_stamp => Time.now
+        }
+        
+        if params[:thread_id]
+          thread_id = params[:thread_id]
+          thread_doc = Message.find_one(:_id => thread_id)
+          thread_doc['messages'] << message_doc
+          thread_doc.update
+        else
+          thread_doc = {
+            :subject  => params[:subject],
+            # :readers  => params[:readers],
+            :messages => [message_doc]
+          }
+          thread_id = Message.insert(thread_doc)
+        end
+
+        redirect "/message/#{thread_id}"
+      end
+
+      # post '/message/update' do
+      #   message = Message.find_one( :_id => BSON::ObjectId(params[:id]) )
+      # 
+      #   message['name']        = params[:name]
+      #   message['amount']      = params[:amount]
+      #   message['due_date']    = params[:due_date]
+      #   message['description'] = params[:description]
+      # 
+      #   message.update
+      #   redirect '/messages'
+      # end
+
+      post '/message/delete' do
+        message = Message.find_one( :_id => BSON::ObjectId(params[:id]) )
+        message.remove
+        redirect '/messages'
+      end
     
     
     
@@ -250,12 +326,22 @@ class Message < Model
   updated_stamp true
 end
 
+class Postit < Model
+  created_stamp true
+  updated_stamp true
+end
+
 class Chore < Model
   created_stamp true
   updated_stamp true
 end
 
 class Bill < Model
+  created_stamp true
+  updated_stamp true
+end
+
+class User < Model
   created_stamp true
   updated_stamp true
 end
